@@ -58,13 +58,12 @@ function checkToken($token)
     $key = 'todo.im';
     $status = array("code" => 2);
     try {
-        JWT::$leeway = 60;//当前时间减去60，把时间留点余地
+        JWT::$leeway = 60; //当前时间减去60，把时间留点余地
         $decoded = JWT::decode($token, $key, array('HS256')); //HS256方式，这里要和签发的时候对应
         $arr = (array)$decoded;
         $res['code'] = 1;
         $res['data'] = $arr['data'];
         return $res;
-
     } catch (SignatureInvalidException $e) { //签名不正确
         $status['msg'] = "签名不正确";
         return $status;

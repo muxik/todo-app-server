@@ -1,9 +1,11 @@
 <?php
-declare (strict_types=1);
+
+declare(strict_types=1);
 
 namespace app\controller;
 
 use app\BaseController;
+use app\middleware\CheckLogin;
 use think\db\exception\DbException;
 use think\Request;
 
@@ -11,6 +13,8 @@ class Todo extends BaseController
 {
 
     protected $model;
+
+    protected $middleware = [CheckLogin::class];
 
     protected function initialize()
     {
@@ -63,12 +67,7 @@ class Todo extends BaseController
             $request->param('id'),
             $request->param('completed')
         );
-
-
         if (!$res) return show(0, $res);
         else return show(1, "Hello", "修改成功！");
     }
-
-
 }
-

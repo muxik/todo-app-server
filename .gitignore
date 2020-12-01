@@ -2,6 +2,3 @@
 /.vscode
 /vendor
 *.log
-.env
-/app
-/route
